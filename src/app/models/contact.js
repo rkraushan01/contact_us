@@ -15,6 +15,11 @@ const contactSchema = new Schema({
     match: [/^\d{10}$/, "Phone number must be exactly 10 digits"], // Regular expression to validate 10-digit phone number without hyphens
 },
 
+state: {
+  type: String, // Define state field as string type
+  required: [true, "State is required."], // Require state field
+},
+
   email: {
     type: String,
     required: [true, "Email is required."],
