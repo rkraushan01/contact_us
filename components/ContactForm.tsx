@@ -9,6 +9,7 @@ interface ContactResponse {
 export default function ContactForm(): JSX.Element {
   const [fullname, setFullname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<string[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
@@ -18,6 +19,7 @@ export default function ContactForm(): JSX.Element {
 
     console.log("Full name: ", fullname);
     console.log("Email: ", email);
+    console.log("Phone Number: ", phoneNumber);
     console.log("Message: ", message);
 
     const res = await fetch("api/contact", {
@@ -28,6 +30,7 @@ export default function ContactForm(): JSX.Element {
       body: JSON.stringify({
         fullname,
         email,
+        phoneNumber,
         message,
       }),
     });
@@ -39,6 +42,7 @@ export default function ContactForm(): JSX.Element {
     if (isSuccess) {
       setFullname("");
       setEmail("");
+      setPhoneNumber("");
       setMessage("");
     }
   };
@@ -74,6 +78,18 @@ export default function ContactForm(): JSX.Element {
         </div>
 
         <div className="flex flex-col gap-2">
+          <label htmlFor="phoneNumber">Phone Number</label>
+          <input
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
+            type="text"
+            id="phoneNumber"
+            placeholder="123-456-7890"
+            className="shadow-md px-6 py-2 border border-slate-300"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
           <label htmlFor="message">Your Message</label>
           <textarea
             onChange={(e) => setMessage(e.target.value)}
@@ -81,13 +97,13 @@ export default function ContactForm(): JSX.Element {
             className="h-32 shadow-md px-6 py-2 border border-slate-300"
             id="message"
             placeholder="Type your message here..."
-            
           ></textarea>
         </div>
 
         <button 
-       className="font-bold bg-green-500"
-        type="submit">
+          className="font-bold bg-green-500"
+          type="submit"
+        >
           Send
         </button>
       </form>

@@ -9,6 +9,12 @@ const contactSchema = new Schema({
     maxLength: [50, "Name must be lesser than 50 characters"],
   },
 
+  phoneNumber: {
+    type: String,
+    required: [true, "Phone number is required."],
+    match: [/^\d{10}$/, "Phone number must be exactly 10 digits"], // Regular expression to validate 10-digit phone number without hyphens
+},
+
   email: {
     type: String,
     required: [true, "Email is required."],
